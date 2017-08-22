@@ -20,11 +20,14 @@ class MenuController: NSObject {
     
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     
+    let api = ACTransitAPI()
+    
     override func awakeFromNib() {
         let icon = NSImage(named: "statusIcon")
         icon?.isTemplate = true
         statusItem.image = icon
         statusItem.menu = statusMenu
+        api.getRoutes()
     }
 
 }
