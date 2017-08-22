@@ -12,6 +12,8 @@
 		43EAF9181F46E1270000F223 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF9161F46E1270000F223 /* MainMenu.xib */; };
 		43EAF9201F495D6B0000F223 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF91F1F495D6A0000F223 /* MenuController.swift */; };
 		43EAF9241F49624F0000F223 /* ACTransitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF9231F49624F0000F223 /* ACTransitAPI.swift */; };
+		43EAF9291F4C1A8B0000F223 /* StopPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF9271F4C1A8B0000F223 /* StopPreferences.swift */; };
+		43EAF92A1F4C1A8B0000F223 /* StopPreferences.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF9281F4C1A8B0000F223 /* StopPreferences.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		43EAF9191F46E1270000F223 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		43EAF91F1F495D6A0000F223 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		43EAF9231F49624F0000F223 /* ACTransitAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ACTransitAPI.swift; path = ../ACTransitAPI.swift; sourceTree = "<group>"; };
+		43EAF9271F4C1A8B0000F223 /* StopPreferences.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopPreferences.swift; sourceTree = "<group>"; };
+		43EAF9281F4C1A8B0000F223 /* StopPreferences.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopPreferences.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +62,8 @@
 				43EAF9121F46E1270000F223 /* AppDelegate.swift */,
 				43EAF9141F46E1270000F223 /* Assets.xcassets */,
 				43EAF9161F46E1270000F223 /* MainMenu.xib */,
+				43EAF9271F4C1A8B0000F223 /* StopPreferences.swift */,
+				43EAF9281F4C1A8B0000F223 /* StopPreferences.xib */,
 				43EAF9191F46E1270000F223 /* Info.plist */,
 				43EAF91F1F495D6A0000F223 /* MenuController.swift */,
 			);
@@ -124,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				43EAF9151F46E1270000F223 /* Assets.xcassets in Resources */,
+				43EAF92A1F4C1A8B0000F223 /* StopPreferences.xib in Resources */,
 				43EAF9181F46E1270000F223 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -135,6 +142,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				43EAF9291F4C1A8B0000F223 /* StopPreferences.swift in Sources */,
 				43EAF9241F49624F0000F223 /* ACTransitAPI.swift in Sources */,
 				43EAF9201F495D6B0000F223 /* MenuController.swift in Sources */,
 				43EAF9131F46E1270000F223 /* AppDelegate.swift in Sources */,

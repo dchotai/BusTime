@@ -3,7 +3,6 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -15,24 +14,20 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="BusTime" customModuleProvider="target"/>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <window title="BusTime" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="QvC-M9-y7g">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="335" y="390" width="480" height="360"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-            <view key="contentView" wantsLayer="YES" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
-                <autoresizingMask key="autoresizingMask"/>
-            </view>
-        </window>
         <customObject id="5ql-wJ-2EY" customClass="MenuController" customModule="BusTime" customModuleProvider="target">
             <connections>
                 <outlet property="statusMenu" destination="SP2-Nn-Gwy" id="vlA-0c-Bsa"/>
-                <outlet property="window" destination="QvC-M9-y7g" id="EyO-2n-CCA"/>
             </connections>
         </customObject>
         <menu id="SP2-Nn-Gwy">
             <items>
+                <menuItem title="Preferences..." id="hg2-8E-CmB" userLabel="Preferences...">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <connections>
+                        <action selector="prefClicked:" target="5ql-wJ-2EY" id="Zib-VT-Whu"/>
+                    </connections>
+                </menuItem>
+                <menuItem isSeparatorItem="YES" id="KWy-lX-mEX"/>
                 <menuItem title="Quit" id="NzY-EA-oWo">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
