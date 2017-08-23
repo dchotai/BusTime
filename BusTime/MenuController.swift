@@ -9,10 +9,13 @@
 import Cocoa
 
 class MenuController: NSObject {
-
-    @IBOutlet weak var window: NSWindow!
     
     @IBOutlet weak var statusMenu: NSMenu!
+    
+    var stopPrefs = StopPreferences()
+    
+    
+
     
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared().terminate(self)
@@ -27,7 +30,15 @@ class MenuController: NSObject {
         icon?.isTemplate = true
         statusItem.image = icon
         statusItem.menu = statusMenu
+        stopPrefs = StopPreferences()
         api.getRoutes()
+    }
+    
+    @IBAction func prefClicked(_ sender: NSMenuItem) {
+//        statusMenu.insertItem(NSMenuItem.separator(), at: 0)
+//        statusMenu.insertItem(NSMenuItem(title: "hello", action: nil, keyEquivalent: ""), at: 0)
+        stopPrefs.showWindow(nil)
+        stopPrefs.api = api
     }
 
 }
