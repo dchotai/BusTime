@@ -67,11 +67,10 @@ class ACTransitAPI {
         return routes
     }
     
-    func getRouteDirections(routeID: String) -> [String]? {
+    func getRouteDirections(routeID: String, completion: @escaping (_ result: [String]) -> Void) {
         let session = URLSession.shared
         let url = URL(string: "\(BASEURL)route/\(routeID)/directions/\(TOKEN)")
         
-        var rv = [String]()
         let task = session.dataTask(with: url!) { data, response, error in
             if let e = error {
                 NSLog("API Error: \(e)")
@@ -79,16 +78,16 @@ class ACTransitAPI {
             if let httpResponse = response as? HTTPURLResponse {
                 if (httpResponse.statusCode == 200){
                     if let directions = self.parseRouteDirections(data!) {
-                        NSLog("\(directions)")
-                        rv = directions
+                        completion(directions)
+
                     }
                 } else {
                     NSLog("API Error: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
+                    completion([])
                 }
             }
         }
         task.resume()
-        return rv
     }
     
     func parseRouteDirections(_ data: Data) -> [String]? {
@@ -106,10 +105,13 @@ class ACTransitAPI {
         let count = json.count
         var i = 1
         
-        while (i < count) {
-//            NSLog(json[i] as! String)
-            directions.append(json[i])
-            i += 2
+        if (count < 2) {
+            directions.append(json[0])
+        } else {
+            while (i < count) {
+                directions.append(json[i])
+                i += 2
+            }
         }
         return directions
     }
