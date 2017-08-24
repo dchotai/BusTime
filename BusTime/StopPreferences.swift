@@ -24,6 +24,8 @@ class StopPreferences: NSWindowController {
     
     weak var api:ACTransitAPI!
     
+    var stopsDict = [String:Int]()
+    
     @IBAction func segmentedControlAction(_ sender: Any) {
         if (segmentedControl.selectedSegment == 0) {
 //            NSLog("plus")
@@ -52,14 +54,44 @@ class StopPreferences: NSWindowController {
         api.getRouteDirections(routeID: id) {
             (_ result) -> Void in
             self.directionPopup.addItems(withTitles: result)
+            self.directionSelect(Any.self)
         }
     }
     
     
     @IBAction func directionSelect(_ sender: Any) {
+        let indexRoute = routePopup.indexOfSelectedItem
+        
+        stopPopup.removeAllItems()
+        
+        var idRoute : String
+        idRoute = ACTransitAPI.routeIDs[indexRoute]
+        
+        var dir: String
+        dir = directionPopup.titleOfSelectedItem!
+        
+        var sched: Int
+        sched = api.getScheduleType()!
+        
+        api.getTrip(routeID: idRoute, direction: dir, schedType: sched) {
+            (_ result) -> Void in
+            
+            self.api.getStops(routeID: idRoute, tripID: result) {
+                (_ rv) -> Void in
 
-        
-        
+                self.setStopsDict(dict: rv)
+                var stopNames = [String]()
+                for key in rv.keys {
+                    stopNames.append(key)
+                }
+                
+                self.stopPopup.addItems(withTitles: stopNames)
+            }
+        }
+    }
+    
+    func setStopsDict(dict : [String:Int]) {
+        self.stopsDict = dict
     }
     
     
