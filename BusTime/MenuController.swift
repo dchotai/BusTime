@@ -13,10 +13,7 @@ class MenuController: NSObject {
     @IBOutlet weak var statusMenu: NSMenu!
     
     var stopPrefs = StopPreferences()
-    
-    
-
-    
+        
     @IBAction func quitClicked(_ sender: NSMenuItem) {
         NSApplication.shared().terminate(self)
     }
@@ -39,6 +36,7 @@ class MenuController: NSObject {
 //        statusMenu.insertItem(NSMenuItem(title: "hello", action: nil, keyEquivalent: ""), at: 0)
         stopPrefs.showWindow(nil)
         stopPrefs.api = api
+//        stopPrefs.routeSelect(Any.self)
     }
 
 }

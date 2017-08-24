@@ -37,7 +37,6 @@ class ACTransitAPI {
             if let httpResponse = response as? HTTPURLResponse {
                 if (httpResponse.statusCode == 200){
                     if let routes = self.parseRouteIDs(data!) {
-//                        NSLog("\(routes)")
                         ACTransitAPI.routeIDs = routes
                     }
                 } else {
@@ -79,11 +78,9 @@ class ACTransitAPI {
                 if (httpResponse.statusCode == 200){
                     if let directions = self.parseRouteDirections(data!) {
                         completion(directions)
-
                     }
                 } else {
                     NSLog("API Error: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
-                    completion([])
                 }
             }
         }
@@ -114,6 +111,85 @@ class ACTransitAPI {
             }
         }
         return directions
+    }
+    
+    func getTrip(routeID: String, direction:String, schedType:Int, completion: @escaping (_ result: Int) -> Void) {
+        let session = URLSession.shared
+        let url = URL(string: "\(BASEURL)route/\(routeID)/trips/\(TOKEN)&direction=\(direction)&scheduleType=\(schedType)")
+        
+        let task = session.dataTask(with: url!) { data, response, error in
+            if let e = error {
+                NSLog("API Error: \(e)")
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200){
+                    if let trip = self.parseTrips(data!) {
+                        completion(trip)
+                    }
+                } else {
+                    NSLog("API Error: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func parseTrips(_ data: Data) -> Int? {
+        let json: [[String:AnyObject]]
+        
+        do {
+            json = try JSONSerialization.jsonObject(with: data) as! [[String:AnyObject]]
+        } catch {
+            NSLog("Direction parsing error")
+            return nil
+        }
+        
+        let tripID = json[0]["TripId"] as! Int
+        return tripID
+    }
+    
+    func getStops(routeID:String, tripID: Int, completion: @escaping (_ rv: [String:Int]) -> Void) {
+        let session = URLSession.shared
+        let url = URL(string: "\(BASEURL)route/\(routeID)/trip/\(tripID)/stops/\(TOKEN)")
+
+        let task = session.dataTask(with: url!) { data, response, error in
+            if let e = error {
+                NSLog("API Error: \(e)")
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200){
+                    if let stops = self.parseStops(data!) {
+                        completion(stops)
+                    }
+                } else {
+                    NSLog("API Error: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    func parseStops(_ data: Data) -> [String:Int]? {
+        let json: [[String:AnyObject]]
+        
+        do {
+            json = try JSONSerialization.jsonObject(with: data) as! [[String:AnyObject]]
+        } catch {
+            NSLog("Direction parsing error")
+            return nil
+        }
+        
+        var dict = [String: Int]()
+        
+        for item in json {
+            var name: String
+            name = item["Name"] as! String
+            
+            var stopid : Int
+            stopid = item["StopId"] as! Int
+            dict[name] = stopid
+        }
+        return dict
     }
     
 }
