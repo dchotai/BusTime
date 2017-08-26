@@ -10,6 +10,7 @@
             <connections>
                 <outlet property="addStop" destination="wj2-Xn-cbD" id="Wkq-oR-i91"/>
                 <outlet property="directionPopup" destination="5Qd-oY-lWB" id="e8q-Mo-bnM"/>
+                <outlet property="prefTableView" destination="aPK-QR-SoY" id="uLB-99-n5R"/>
                 <outlet property="prefWindow" destination="atR-YH-LWR" id="gU0-vE-zlk"/>
                 <outlet property="routePopup" destination="9Hx-IN-zQl" id="xKL-s9-xZg"/>
                 <outlet property="segmentedControl" destination="ObX-LY-Q7m" id="a45-SV-oyw"/>
@@ -27,14 +28,14 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="42" horizontalPageScroll="10" verticalLineScroll="42" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0J-CH-gHZ">
+                    <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0J-CH-gHZ">
                         <rect key="frame" x="20" y="31" width="440" height="309"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" ambiguous="YES" id="OPQ-AR-4R7">
                             <rect key="frame" x="1" y="0.0" width="438" height="308"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
-                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowHeight="40" rowSizeStyle="automatic" headerView="1KV-gP-n9n" viewBased="YES" id="aPK-QR-SoY">
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" alternatingRowBackgroundColors="YES" columnReordering="NO" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" rowSizeStyle="automatic" headerView="1KV-gP-n9n" viewBased="YES" id="aPK-QR-SoY">
                                     <rect key="frame" x="0.0" y="0.0" width="438" height="285"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
@@ -53,14 +54,14 @@
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                             <prototypeCellViews>
-                                                <tableCellView id="eG4-Sf-61e">
-                                                    <rect key="frame" x="1" y="1" width="435" height="40"/>
+                                                <tableCellView identifier="stopCell" id="Enz-0p-udc">
+                                                    <rect key="frame" x="1" y="1" width="435" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TMg-mN-8Yy">
-                                                            <rect key="frame" x="0.0" y="23" width="435" height="17"/>
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wK-Qx-wcW">
+                                                            <rect key="frame" x="0.0" y="0.0" width="435" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="VVF-IN-SFs">
+                                                            <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="nEv-2O-5yB">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
@@ -68,7 +69,7 @@
                                                         </textField>
                                                     </subviews>
                                                     <connections>
-                                                        <outlet property="textField" destination="TMg-mN-8Yy" id="JEg-65-tlW"/>
+                                                        <outlet property="textField" destination="7wK-Qx-wcW" id="arw-w2-6yK"/>
                                                     </connections>
                                                 </tableCellView>
                                             </prototypeCellViews>
@@ -91,16 +92,13 @@
                         </tableHeaderView>
                     </scrollView>
                     <segmentedControl identifier="segmentedControl" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ObX-LY-Q7m">
-                        <rect key="frame" x="20" y="10" width="98" height="23"/>
+                        <rect key="frame" x="20" y="10" width="67" height="23"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="momentary" id="Tar-bK-Gsd">
                             <font key="font" metaFont="system"/>
                             <segments>
                                 <segment image="NSAddTemplate" width="32"/>
                                 <segment image="NSRemoveTemplate" width="32" tag="1"/>
-                                <segment image="NSActionTemplate" tag="2">
-                                    <nil key="label"/>
-                                </segment>
                             </segments>
                         </segmentedCell>
                         <connections>
@@ -129,6 +127,9 @@
 DQ
 </string>
                         </buttonCell>
+                        <connections>
+                            <action selector="addStop:" target="-2" id="HXi-ah-lXJ"/>
+                        </connections>
                     </button>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TUO-Cc-tye">
                         <rect key="frame" x="303" y="13" width="81" height="32"/>
@@ -210,7 +211,6 @@ Gw
         </window>
     </objects>
     <resources>
-        <image name="NSActionTemplate" width="14" height="14"/>
         <image name="NSAddTemplate" width="11" height="11"/>
         <image name="NSRemoveTemplate" width="11" height="11"/>
     </resources>
