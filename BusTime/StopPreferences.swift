@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class StopPreferences: NSWindowController {
+class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataSource {
     
     @IBOutlet weak var segmentedControl: NSSegmentedControl!
     
@@ -22,26 +22,34 @@ class StopPreferences: NSWindowController {
     
     @IBOutlet weak var stopPopup: NSPopUpButton!
     
+    @IBOutlet weak var prefTableView: NSTableView!
+    
     weak var api:ACTransitAPI!
     
     var stopsDict = [String:Int]()
     
+    let defaults = UserDefaults.standard
+    
     @IBAction func segmentedControlAction(_ sender: Any) {
         if (segmentedControl.selectedSegment == 0) {
-//            NSLog("plus")
-            
             routePopup.removeAllItems()
             routePopup.addItems(withTitles: ACTransitAPI.routeIDs)
             
             prefWindow.beginSheet(addStop, completionHandler: nil)
-            
-//            prefWindow.endSheet(addStop)
-        } else if (segmentedControl.selectedSegment == 1) {
-            NSLog("minus")
         } else {
-            NSLog("edit")
+            let currRow = prefTableView.selectedRow
+                        var savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
+            let currName = savedStopNames.remove(at: currRow)
+            defaults.set(savedStopNames, forKey: "savedStopNames")
+            
+            var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
+            savedStopIDs.removeValue(forKey: currName)
+            defaults.set(savedStopIDs, forKey: "savedStopIDs")
+            
+            prefTableView.reloadData()
         }
     }
+
     
     @IBAction func routeSelect(_ sender: Any) {
         let index = routePopup.indexOfSelectedItem
@@ -99,6 +107,20 @@ class StopPreferences: NSWindowController {
         prefWindow.endSheet(addStop)
     }
     
+    @IBAction func addStop(_ sender: Any) {
+        if (self.stopPopup.titleOfSelectedItem != nil) {
+            var savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
+            savedStopNames.append(stopPopup.titleOfSelectedItem!)
+            defaults.set(savedStopNames, forKey: "savedStopNames")
+            
+            var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
+            savedStopIDs[stopPopup.titleOfSelectedItem!] = self.stopsDict[stopPopup.titleOfSelectedItem!]
+            defaults.set(savedStopIDs, forKey: "savedStopIDs")
+            prefTableView.reloadData()
+            
+            self.prefWindow.endSheet(addStop)
+        }
+    }
     
     override var windowNibName : String! {
         return "StopPreferences"
@@ -109,6 +131,31 @@ class StopPreferences: NSWindowController {
         self.window?.center()
         self.window?.makeKeyAndOrderFront(nil)
         NSApp.activate(ignoringOtherApps: true)
+        prefTableView.delegate = self
+        prefTableView.dataSource = self
     }
     
+    
+    func numberOfRows(in tableView: NSTableView) -> Int {
+        let savedNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
+        return savedNames.count
+    }
+    
+    func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
+        let savedNames = defaults.object(forKey: "savedStopNames") as! [String]
+        let savedIDs = defaults.object(forKey: "savedStopIDs") as! [String:Int]
+        if (savedIDs.count == 0) {
+            NSLog("\(savedNames[row]) nonefound")
+            return nil
+        }
+        
+        if let cell = tableView.make(withIdentifier: "stopCell", owner: nil) as? NSTableCellView {
+            cell.textField?.stringValue = "\(savedNames[row])"
+            return cell
+        }
+        return nil
+    }
+
 }
+
+
