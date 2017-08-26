@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -20,7 +21,7 @@
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <window title="Preferences" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" animationBehavior="default" id="atR-YH-LWR">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="335" y="390" width="480" height="360"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
@@ -28,10 +29,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="480" height="360"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView wantsLayer="YES" fixedFrame="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0J-CH-gHZ">
+                    <scrollView wantsLayer="YES" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R0J-CH-gHZ">
                         <rect key="frame" x="20" y="31" width="440" height="309"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <clipView key="contentView" ambiguous="YES" id="OPQ-AR-4R7">
+                        <clipView key="contentView" id="OPQ-AR-4R7">
                             <rect key="frame" x="1" y="0.0" width="438" height="308"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -58,9 +58,8 @@
                                                     <rect key="frame" x="1" y="1" width="435" height="17"/>
                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                     <subviews>
-                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7wK-Qx-wcW">
+                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7wK-Qx-wcW">
                                                             <rect key="frame" x="0.0" y="0.0" width="435" height="17"/>
-                                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="nEv-2O-5yB">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -68,6 +67,11 @@
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="7wK-Qx-wcW" firstAttribute="centerX" secondItem="Enz-0p-udc" secondAttribute="centerX" id="58m-zc-FYp"/>
+                                                        <constraint firstItem="7wK-Qx-wcW" firstAttribute="leading" secondItem="Enz-0p-udc" secondAttribute="leading" constant="2" id="Qcz-3m-trS"/>
+                                                        <constraint firstItem="7wK-Qx-wcW" firstAttribute="centerY" secondItem="Enz-0p-udc" secondAttribute="centerY" id="lpl-s5-13x"/>
+                                                    </constraints>
                                                     <connections>
                                                         <outlet property="textField" destination="7wK-Qx-wcW" id="arw-w2-6yK"/>
                                                     </connections>
@@ -78,6 +82,9 @@
                                 </tableView>
                             </subviews>
                         </clipView>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="R0J-CH-gHZ" secondAttribute="height" multiplier="440:309" id="bYm-Ie-i2g"/>
+                        </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="YfA-5E-Yt3">
                             <rect key="frame" x="1" y="-16" width="0.0" height="16"/>
                             <autoresizingMask key="autoresizingMask"/>
@@ -91,9 +98,11 @@
                             <autoresizingMask key="autoresizingMask"/>
                         </tableHeaderView>
                     </scrollView>
-                    <segmentedControl identifier="segmentedControl" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ObX-LY-Q7m">
+                    <segmentedControl identifier="segmentedControl" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ObX-LY-Q7m">
                         <rect key="frame" x="20" y="10" width="67" height="23"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="ObX-LY-Q7m" secondAttribute="height" multiplier="67:21" id="38Q-Po-Vel"/>
+                        </constraints>
                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="smallSquare" trackingMode="momentary" id="Tar-bK-Gsd">
                             <font key="font" metaFont="system"/>
                             <segments>
@@ -106,10 +115,18 @@
                         </connections>
                     </segmentedControl>
                 </subviews>
+                <constraints>
+                    <constraint firstItem="ObX-LY-Q7m" firstAttribute="leading" secondItem="R0J-CH-gHZ" secondAttribute="leading" id="6qd-p9-wiR"/>
+                    <constraint firstItem="R0J-CH-gHZ" firstAttribute="top" secondItem="OlG-I3-hgl" secondAttribute="top" constant="20" id="DW6-Wj-egz"/>
+                    <constraint firstAttribute="bottom" secondItem="R0J-CH-gHZ" secondAttribute="bottom" constant="31" id="DvB-eP-WZo"/>
+                    <constraint firstItem="R0J-CH-gHZ" firstAttribute="leading" secondItem="OlG-I3-hgl" secondAttribute="leading" constant="20" id="FsE-A0-r3V"/>
+                    <constraint firstAttribute="bottom" secondItem="ObX-LY-Q7m" secondAttribute="bottom" constant="11" id="Mk1-qu-WB5"/>
+                    <constraint firstAttribute="trailing" secondItem="R0J-CH-gHZ" secondAttribute="trailing" constant="20" id="mbJ-Al-OiR"/>
+                </constraints>
             </view>
         </window>
         <window title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" oneShot="NO" releasedWhenClosed="NO" showsToolbarButton="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="wj2-Xn-cbD">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+            <windowStyleMask key="styleMask" titled="YES" closable="YES"/>
             <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
             <rect key="contentRect" x="1563" y="-335" width="480" height="186"/>
             <rect key="screenRect" x="1280" y="-640" width="2560" height="1417"/>
@@ -118,7 +135,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t9n-cn-H9Q">
-                        <rect key="frame" x="384" y="13" width="81" height="32"/>
+                        <rect key="frame" x="383" y="13" width="82" height="32"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" inset="2" id="YeE-WS-d3n">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
