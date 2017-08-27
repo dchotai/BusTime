@@ -54,6 +54,7 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
                 defaults.set(savedStopIDs, forKey: "savedStopIDs")
             
                 prefTableView.reloadData()
+                menuController.updateStops()
             }
         }
     }
