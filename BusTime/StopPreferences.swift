@@ -30,6 +30,12 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
     
     let defaults = UserDefaults.standard
     
+    weak var menuController : MenuController!
+    
+    func setMenuController(mc : MenuController) {
+        menuController = mc
+    }
+    
     @IBAction func segmentedControlAction(_ sender: Any) {
         if (segmentedControl.selectedSegment == 0) {
             routePopup.removeAllItems()
@@ -38,15 +44,17 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
             prefWindow.beginSheet(addStop, completionHandler: nil)
         } else {
             let currRow = prefTableView.selectedRow
-                        var savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
-            let currName = savedStopNames.remove(at: currRow)
-            defaults.set(savedStopNames, forKey: "savedStopNames")
+            var savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
+            if (currRow != -1) {
+                let currName = savedStopNames.remove(at: currRow)
+                defaults.set(savedStopNames, forKey: "savedStopNames")
             
-            var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
-            savedStopIDs.removeValue(forKey: currName)
-            defaults.set(savedStopIDs, forKey: "savedStopIDs")
+                var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
+                savedStopIDs.removeValue(forKey: currName)
+                defaults.set(savedStopIDs, forKey: "savedStopIDs")
             
-            prefTableView.reloadData()
+                prefTableView.reloadData()
+            }
         }
     }
 
@@ -116,7 +124,13 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
             var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
             savedStopIDs[stopPopup.titleOfSelectedItem!] = self.stopsDict[stopPopup.titleOfSelectedItem!]
             defaults.set(savedStopIDs, forKey: "savedStopIDs")
+            
+            var savedStopRoutes = defaults.object(forKey: "savedStopRoutes") as? [String:String] ?? [String:String]()
+            savedStopRoutes[stopPopup.titleOfSelectedItem!] = routePopup.titleOfSelectedItem!
+            defaults.set(savedStopRoutes, forKey: "savedStopRoutes")
             prefTableView.reloadData()
+            
+            menuController.updateStops()
             
             self.prefWindow.endSheet(addStop)
         }

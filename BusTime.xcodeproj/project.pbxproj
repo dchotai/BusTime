@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		43A766051F4CC8700057424B /* ACTransitAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A766041F4CC8700057424B /* ACTransitAPI.swift */; };
+		43D17E4C1F524A0100786122 /* StopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43D17E4A1F524A0100786122 /* StopView.swift */; };
+		43D17E531F52579D00786122 /* StopView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43D17E521F52579C00786122 /* StopView.xib */; };
 		43EAF9131F46E1270000F223 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43EAF9121F46E1270000F223 /* AppDelegate.swift */; };
 		43EAF9151F46E1270000F223 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF9141F46E1270000F223 /* Assets.xcassets */; };
 		43EAF9181F46E1270000F223 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 43EAF9161F46E1270000F223 /* MainMenu.xib */; };
@@ -18,6 +20,8 @@
 
 /* Begin PBXFileReference section */
 		43A766041F4CC8700057424B /* ACTransitAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ACTransitAPI.swift; sourceTree = "<group>"; };
+		43D17E4A1F524A0100786122 /* StopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StopView.swift; sourceTree = "<group>"; };
+		43D17E521F52579C00786122 /* StopView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StopView.xib; sourceTree = "<group>"; };
 		43EAF90F1F46E1270000F223 /* BusTime.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusTime.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		43EAF9121F46E1270000F223 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		43EAF9141F46E1270000F223 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -62,6 +66,8 @@
 				43EAF9121F46E1270000F223 /* AppDelegate.swift */,
 				43EAF9141F46E1270000F223 /* Assets.xcassets */,
 				43EAF9161F46E1270000F223 /* MainMenu.xib */,
+				43D17E4A1F524A0100786122 /* StopView.swift */,
+				43D17E521F52579C00786122 /* StopView.xib */,
 				43EAF9271F4C1A8B0000F223 /* StopPreferences.swift */,
 				43EAF9281F4C1A8B0000F223 /* StopPreferences.xib */,
 				43EAF9191F46E1270000F223 /* Info.plist */,
@@ -131,6 +137,7 @@
 			files = (
 				43EAF9151F46E1270000F223 /* Assets.xcassets in Resources */,
 				43EAF92A1F4C1A8B0000F223 /* StopPreferences.xib in Resources */,
+				43D17E531F52579D00786122 /* StopView.xib in Resources */,
 				43EAF9181F46E1270000F223 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -145,6 +152,7 @@
 				43A766051F4CC8700057424B /* ACTransitAPI.swift in Sources */,
 				43EAF9291F4C1A8B0000F223 /* StopPreferences.swift in Sources */,
 				43EAF9201F495D6B0000F223 /* MenuController.swift in Sources */,
+				43D17E4C1F524A0100786122 /* StopView.swift in Sources */,
 				43EAF9131F46E1270000F223 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
