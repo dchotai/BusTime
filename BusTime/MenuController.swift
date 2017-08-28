@@ -23,6 +23,7 @@ class MenuController: NSObject {
     let statusItem = NSStatusBar.system().statusItem(withLength: NSVariableStatusItemLength)
     
     let api = ACTransitAPI()
+    var timer = Timer()
     
     override func awakeFromNib() {
         let icon = NSImage(named: "statusIcon")
@@ -33,6 +34,7 @@ class MenuController: NSObject {
         stopPrefs.setMenuController(mc: self)
         api.getRoutes()
         updateStops()
+        repeatUpdate()
     }
     
     @IBAction func prefClicked(_ sender: NSMenuItem) {
@@ -40,7 +42,12 @@ class MenuController: NSObject {
         stopPrefs.api = api
     }
     
+    func repeatUpdate() {
+        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.updateStops), userInfo: nil, repeats: true)
+    }
+    
     func updateStops() {
+        NSLog("Updating stops")
         let savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
         let savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
         let savedStopRoutes = defaults.object(forKey: "savedStopRoutes") as? [String:String] ?? [String:String]()

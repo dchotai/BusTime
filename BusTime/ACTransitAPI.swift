@@ -256,7 +256,6 @@ class ACTransitAPI {
         let minSec = DateComponentsFormatter()
         minSec.allowedUnits = [.minute, .second]
         minSec.unitsStyle = .positional
-        minSec.zeroFormattingBehavior = [.pad]
 
         return minSec.string(from: diff)
     }
