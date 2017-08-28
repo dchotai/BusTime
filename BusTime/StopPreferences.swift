@@ -39,6 +39,8 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
     @IBAction func segmentedControlAction(_ sender: Any) {
         if (segmentedControl.selectedSegment == 0) {
             routePopup.removeAllItems()
+            directionPopup.removeAllItems()
+            stopPopup.removeAllItems()
             routePopup.addItems(withTitles: ACTransitAPI.routeIDs)
             
             prefWindow.beginSheet(addStop, completionHandler: nil)
@@ -119,19 +121,21 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
     @IBAction func addStop(_ sender: Any) {
         if (self.stopPopup.titleOfSelectedItem != nil) {
             var savedStopNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
-            savedStopNames.append(stopPopup.titleOfSelectedItem!)
-            defaults.set(savedStopNames, forKey: "savedStopNames")
+            if !(savedStopNames.contains(stopPopup.titleOfSelectedItem!)) {
+                savedStopNames.append(stopPopup.titleOfSelectedItem!)
+                defaults.set(savedStopNames, forKey: "savedStopNames")
             
-            var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
-            savedStopIDs[stopPopup.titleOfSelectedItem!] = self.stopsDict[stopPopup.titleOfSelectedItem!]
-            defaults.set(savedStopIDs, forKey: "savedStopIDs")
+                var savedStopIDs = defaults.object(forKey: "savedStopIDs") as? [String:Int] ?? [String:Int]()
+                savedStopIDs[stopPopup.titleOfSelectedItem!] = self.stopsDict[stopPopup.titleOfSelectedItem!]
+                defaults.set(savedStopIDs, forKey: "savedStopIDs")
             
-            var savedStopRoutes = defaults.object(forKey: "savedStopRoutes") as? [String:String] ?? [String:String]()
-            savedStopRoutes[stopPopup.titleOfSelectedItem!] = routePopup.titleOfSelectedItem!
-            defaults.set(savedStopRoutes, forKey: "savedStopRoutes")
-            prefTableView.reloadData()
+                var savedStopRoutes = defaults.object(forKey: "savedStopRoutes") as? [String:String] ?? [String:String]()
+                savedStopRoutes[stopPopup.titleOfSelectedItem!] = routePopup.titleOfSelectedItem!
+                defaults.set(savedStopRoutes, forKey: "savedStopRoutes")
+                prefTableView.reloadData()
             
-            menuController.updateStops()
+                menuController.updateStops()
+            }
             
             self.prefWindow.endSheet(addStop)
         }
@@ -160,7 +164,6 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
         let savedNames = defaults.object(forKey: "savedStopNames") as! [String]
         let savedIDs = defaults.object(forKey: "savedStopIDs") as! [String:Int]
         if (savedIDs.count == 0) {
-            NSLog("\(savedNames[row]) nonefound")
             return nil
         }
         
