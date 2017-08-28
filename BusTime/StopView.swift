@@ -41,8 +41,12 @@ class StopView: NSView {
         }
         
         self.stopName.stringValue = "\(route): " + name.prefix(2).joined(separator: " & ")
-//        self.estTime.stringValue = String(format: "%.2f minutes", time)
-        self.estTime.stringValue = time + " minutes"
+        let splitEst = time.components(separatedBy: ":")
+        if (splitEst.count > 1) {
+            self.estTime.stringValue = splitEst[0] + " minutes, " + splitEst[1] + " seconds"
+        } else {
+            self.estTime.stringValue = "ERROR: Unable to retrieve prediction time"
+        }
     }
     
 }

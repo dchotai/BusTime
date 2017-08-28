@@ -192,4 +192,73 @@ class ACTransitAPI {
         return dict
     }
     
+    func getPrediction(stopID: Int, routeID: String, completion: @escaping (_ rv: String) -> Void) {
+        let session = URLSession.shared
+        let url = URL(string: "\(BASEURL)stops/\(stopID)/predictions/\(TOKEN)")
+        
+        let task = session.dataTask(with: url!) { data, response, error in
+            if let e = error {
+                NSLog("API Error: \(e)")
+            }
+            if let httpResponse = response as? HTTPURLResponse {
+                if (httpResponse.statusCode == 200){
+                    if let prediction = self.parsePredictions(data!, routeID: routeID) {
+                        completion(prediction)
+                    }
+                } else {
+                    NSLog("API Error: %d %@", httpResponse.statusCode, HTTPURLResponse.localizedString(forStatusCode: httpResponse.statusCode))
+                }
+            }
+        }
+        task.resume()
+
+    }
+    
+    func parsePredictions(_ data: Data, routeID: String) -> String? {
+        let json: [[String:AnyObject]]
+        
+        do {
+            json = try JSONSerialization.jsonObject(with: data) as! [[String:AnyObject]]
+        } catch {
+            NSLog("Direction parsing error")
+            return nil
+        }
+        
+        var est = ""
+        
+        for item in json.reversed() {
+            if (item["RouteName"] as! String == routeID) {
+                est = item["PredictedDeparture"] as! String
+            }
+        }
+        
+        if (est == "") {
+            return "Stop inactive"
+        }
+        
+        let time = est.components(separatedBy: "T")[1]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mm:ss"
+        var fullEstDate = dateFormatter.date(from: time)
+
+        
+        let curr = Date()
+        
+        let cal = Calendar.current
+        var components = cal.dateComponents([.year, .month, .day, .hour, .minute, .second], from: fullEstDate!)
+        components.year = cal.component(.year, from: curr)
+        components.month = cal.component(.month, from: curr)
+        components.day = cal.component(.day, from: curr)
+        fullEstDate = cal.date(from: components)!
+        
+        
+        let diff = fullEstDate!.timeIntervalSince(curr)
+        let minSec = DateComponentsFormatter()
+        minSec.allowedUnits = [.minute, .second]
+        minSec.unitsStyle = .positional
+        minSec.zeroFormattingBehavior = [.pad]
+
+        return minSec.string(from: diff)
+    }
+    
 }
