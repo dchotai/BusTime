@@ -114,6 +114,17 @@
                             <action selector="segmentedControlAction:" target="-2" id="oXZ-Id-cXV"/>
                         </connections>
                     </segmentedControl>
+                    <button horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xmz-4K-UyT">
+                        <rect key="frame" x="437" y="5" width="25" height="25"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                        <buttonCell key="cell" type="help" bezelStyle="helpButton" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="RBG-QO-V1j">
+                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                            <font key="font" metaFont="system"/>
+                        </buttonCell>
+                        <connections>
+                            <action selector="pressHelp:" target="-2" id="ly5-q6-yUk"/>
+                        </connections>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ObX-LY-Q7m" firstAttribute="leading" secondItem="R0J-CH-gHZ" secondAttribute="leading" id="6qd-p9-wiR"/>

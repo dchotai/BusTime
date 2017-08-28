@@ -154,6 +154,15 @@ class StopPreferences: NSWindowController, NSTableViewDelegate, NSTableViewDataS
         prefTableView.dataSource = self
     }
     
+    @IBAction func pressHelp(_ sender: Any) {
+        let alert = NSAlert()
+        alert.messageText = "Disclaimer: Predictions are rounded to the nearest minute. Buses may arrive earlier than expected."
+        alert.informativeText = "Report bugs at https://github.com/dchotai/BusTime"
+        alert.alertStyle = NSAlertStyle.informational
+        alert.addButton(withTitle: "OK")
+        alert.icon = NSImage(named: "statusIcon")
+        alert.runModal()
+    }
     
     func numberOfRows(in tableView: NSTableView) -> Int {
         let savedNames = defaults.object(forKey: "savedStopNames") as? [String] ?? [String]()
