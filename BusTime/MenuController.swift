@@ -34,6 +34,17 @@ class MenuController: NSObject {
         stopPrefs.setMenuController(mc: self)
         api.getRoutes()
         updateStops()
+        if ((defaults.object(forKey: "disclaimer") == nil)) {
+            let alert = NSAlert()
+            alert.messageText = "Disclaimer: Predictions are rounded to the nearest minute. Buses may arrive earlier than expected."
+            alert.informativeText = "Report bugs at https://github.com/dchotai/BusTime"
+            alert.alertStyle = NSAlertStyle.informational
+            alert.addButton(withTitle: "OK")
+            alert.icon = NSImage(named: "statusIcon")
+            alert.runModal()
+            
+            defaults.set(true, forKey: "disclaimer")
+        }
         repeatUpdate()
     }
     
