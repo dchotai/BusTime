@@ -54,7 +54,7 @@ class MenuController: NSObject {
     }
     
     func repeatUpdate() {
-        timer = Timer.scheduledTimer(timeInterval: 10, target: self, selector: #selector(self.updateStops), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 20, target: self, selector: #selector(self.updateStops), userInfo: nil, repeats: true)
     }
     
     func updateStops() {
